@@ -57,20 +57,21 @@ void UI::printPatient(LinkedQueue<Patient> &p, int T)
 	}
 }
 
-void UI::printPriPatient(priQueue<Patient>& p, int T)
+void UI::printPriPatient(priQueue<Patient> &p, int T)
 {
 	int c = 0;
-	priQueue<Patient> *temp1 = &p;
+	priQueue<Patient> temp1 = p;
 	priQueue<Patient> temp2;
 	int x = 0;
 	//if timestep of patient arrives, put that patient in temp Queue
-	while (!temp1->isEmpty()) {
+	while (!temp1.isEmpty()) {
 		Patient a;
-		temp1->dequeue(a, x);
+		temp1.dequeue(a, x);
 		if (a.getRequestTime() <= T) {
 			c++;
 			temp2.enqueue(a,x);
 		}
+
 	}
 	cout << "Total Number: " << c << " ";
 	cout << "Patient's IDs: ";

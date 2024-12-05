@@ -50,7 +50,26 @@ class priQueue
     priNode<T>* head;
 public:
     priQueue() : head(nullptr) {}
+    //copy constructor
 
+    priQueue(const priQueue<T>& PQ) {
+        head = nullptr;
+        priNode<T>* NodePtr = PQ.head;
+        while (NodePtr) {
+            int a = NodePtr->getPri();
+            enqueue(NodePtr->getItem(a), a);
+            NodePtr = NodePtr->getNext();
+        }
+    }
+    /*
+    frontPtr = backPtr = nullptr;
+	Node<T>* NodePtr = LQ.frontPtr;	//start at the front node in LQ
+	while (NodePtr)
+	{
+		enqueue(NodePtr->getItem());	//get data of each node and enqueue it in this queue 
+		NodePtr = NodePtr->getNext();
+	}
+    */
     ~priQueue() {
         T tmp;
         int p;

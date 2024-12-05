@@ -26,11 +26,13 @@ void Organizer::Simulation( ) {
 		for (int i = 0; i < Hospitalnumber; i++) {
 			Hospital& currentHospital = hospital[i];  
 			int randomNum = rand() % 101;
-
+			//ui.printPriPatient(currentHospital.getEPQueue(), timestep);
+			//moveEPReqToFinish(currentHospital.getEPQueue(), currentHospital);
 			if (randomNum >= 10 && randomNum < 20) {
 				moveSPReqToFinish(currentHospital.getSPQueue(), currentHospital);
 			}
 			else if (randomNum >= 20 && randomNum < 25) {
+				//ui.printPriPatient(currentHospital.getEPQueue(), timestep);
 
 				moveEPReqToFinish(currentHospital.getEPQueue(), currentHospital);
 			}
