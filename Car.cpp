@@ -17,6 +17,8 @@ void Car::setStatus(string status)
 {
 	carStatus = status;
 }
+void Car::setPatient(Patient P) { patient = &P; }
+Patient* Car::getPatient() { return patient; }
 string Car::getType() const { return carType;}
 int Car::getSpeed() const { return carSpeed;}
 string Car::getStatus() const { return carStatus;}

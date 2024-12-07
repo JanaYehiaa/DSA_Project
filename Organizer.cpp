@@ -101,6 +101,57 @@ void Organizer::Simulation( ) {
 
 int Organizer::getHospitalnum() const { return Hospitalnumber; }
 int Organizer::getReqno() const { return  Reqno; }
+void Organizer:: AssignNPToNC(Patient P, Hospital& h){
+	if (h.getnoNcar() != 0)
+	{
+		Car car1;
+		/*LinkedQueue<Patient> np = h.getNPQueue();
+		priQueue<Patient> ep = h.getEPQueue();
+		if (ep.isEmpty()==true)*/
+		LinkedQueue<Car>& c = h.getNCQueue();
+		c.dequeue(car1);
+		car1.setPatient(P);// this function takes a patient to assign to normal car; check for emergency first and type of patient to be done outside function
+	}
+}
+void Organizer::AssignEPToEC(Patient EP, Hospital& h) {
+	Car car1;
+	if (h.getnoNcar() != 0)
+	{
+		LinkedQueue<Car>& c = h.getNCQueue();
+		c.dequeue(car1);
+		car1.setPatient(EP);
+	}
+	else if (h.getnoScar() != 0) {
+		LinkedQueue<Car>& c = h.getSCQueue();
+		c.dequeue(car1); 
+		car1.setPatient(EP);  
+	}
+	else
+	{
+		for (int i = 0; i < Hospitalnumber; i++)
+		{
+			Hospital& currentHospital = hospital[i]; 
+			//if(currentHospital==EP.getNearestHospital()), howa el nearest int da bey3abar 3n eh?
+			if (currentHospital.getnoNcar() != 0)
+			{
+				LinkedQueue<Car>& c = h.getNCQueue();
+				c.dequeue(car1);//should I check if the car has a patient or should I just move the car to out car?? y3ni hal di function tania el howa el requirment el ba3do
+				car1.setPatient(EP); 
+				break;//es2ali 7ad; mmken while loop
+			}
+
+		}
+	}
+}
+void Organizer::AssignSPToSC(Patient SP, Hospital& h){
+	if (h.getnoScar()!=0)
+	{
+		Car car1;
+		LinkedQueue<Car>& c = h.getSCQueue();
+		c.dequeue(car1);
+		car1.setPatient(SP);
+	}
+}
 
 
 void Organizer::moveNPReqToFinish(LinkedQueue<Patient>& list, Hospital& h) {

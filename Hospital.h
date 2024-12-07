@@ -38,6 +38,8 @@ public:
 	priQueue<Patient>& getEPQueue() ;
 	LinkedQueue<Patient>& getSPQueue() ;
 	LinkedQueue<Patient>& getNPQueue();
+	LinkedQueue<Car>& getNCQueue();
+	LinkedQueue<Car>& getSCQueue();
 
 
 	void enqueueNp(Patient &p);

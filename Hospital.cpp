@@ -34,6 +34,7 @@ int Hospital::getID() const { return ID; }
 //int Hospital::getNBofHospitals() const { return nbOfHospitals;} 
 Car* Hospital::getCars() const { return cars; }
 
+
 void Hospital::enqueueScar(Car& car,int n ) {
 	for (int i = 0; i < n; i++)
 		SCarslist.enqueue(car);
@@ -94,7 +95,12 @@ LinkedQueue<Patient>& Hospital::getSPQueue() {
 LinkedQueue<Patient>& Hospital::getNPQueue() {
 	return NPlist;
 }
-
+LinkedQueue<Car>& Hospital::getNCQueue() {
+	return NCarslist;
+}
+LinkedQueue<Car>& Hospital::getSCQueue() {
+	return SCarslist;
+}
 int Hospital::getnoScar() const { return noScars; }
 int Hospital::getnoNcar() const { return noNcars; }
 

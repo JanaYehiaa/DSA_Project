@@ -10,7 +10,7 @@ class Car
 	int carSpeed;
 	int hospID;
 	string carStatus;
-	//Patient* patient;
+	Patient* patient=nullptr;
 public:
 	Car();
 	Car(string type, int speed,  int HID, string status = "Ready");
@@ -22,6 +22,8 @@ public:
 	int getHospID() const;
 	friend ostream& operator <<(ostream& out, const Car c);
 	string getStatus() const;
+	void setPatient(Patient P);
+	Patient* getPatient();
 	//void Print();
 	//~Car();
 };

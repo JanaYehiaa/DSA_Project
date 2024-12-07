@@ -30,6 +30,9 @@ public:
 	void Simulation();
 	int getHospitalnum() const;
 	int getReqno() const;
+	void AssignNPToNC(Patient P, Hospital& h);
+	void AssignEPToEC(Patient P, Hospital& h);
+	void AssignSPToSC(Patient SP, Hospital& h); 
 	~Organizer();
 };
 
