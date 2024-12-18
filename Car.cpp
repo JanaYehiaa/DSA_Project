@@ -1,11 +1,11 @@
 #include "Car.h"
 #include <iostream>
 using namespace std;
-Car::Car() : carType("Unspecified"), carSpeed(0), carStatus("Stopped"), hospID(0){}
-Car::Car(string type, int speed,  int HID, string status): carType(type), carSpeed(speed), hospID(HID), carStatus(status) {}
+Car::Car() : carType('U'), carSpeed(0), carStatus("Stopped"), hospID(0) {}
+Car::Car(char type, int speed,  int HID, string status): carType(type), carSpeed(speed), hospID(HID), carStatus(status) {}
 int Car::getHospID() const { return hospID; }
 
-void Car::setType(string type) 
+void Car::setType(char type) 
 {
 	carType = type;
 }
@@ -13,13 +13,21 @@ void Car::setSpeed(int speed)
 {
 	carSpeed = speed;
 }
+void Car::setID(int id)
+{
+	carID = id;
+}
+int Car::getID()
+{
+	return carID;
+}
 void Car::setStatus(string status)
 {
 	carStatus = status;
 }
 void Car::setPatient(Patient P) { patient = &P; }
 Patient* Car::getPatient() { return patient; }
-string Car::getType() const { return carType;}
+char Car::getType() const { return carType; }
 int Car::getSpeed() const { return carSpeed;}
 string Car::getStatus() const { return carStatus;}
 

@@ -16,7 +16,8 @@ void Organizer::Simulation( ) {
 	ui.readmode();
 	if (ui.getmode() == 2)
 		return;
-	string filename = ui.getFilename();
+	filename = (ui.getFilename()); 
+
 	Loadfile(filename);
 	bool flag = (FinishedPat == Reqno);
 	while (!flag) {
@@ -96,7 +97,6 @@ void Organizer::Simulation( ) {
 	}
 	ui.display("Simulation Ended! ");
 }
-
 
 
 int Organizer::getHospitalnum() const { return Hospitalnumber; }
@@ -228,7 +228,7 @@ void Organizer::moveCarBacktoFree(priQueue<Car>& backCars) {
 
 				if (hospital[i].getID() == c.getHospID()) {
 
-					if (c.getType() == "Normal") {
+					if (c.getType() == 'N') {
 						hospital[i].enqueueNcar(c);
 						}
 					else {
@@ -285,8 +285,8 @@ void Organizer::Loadfile(const string& filename) {
 		
 		int id = i + 1;
 		file >> noScar >> noNcar;
-		Car a("Special", Sspeed, id);
-		Car b("Normal", Nspeed, id);
+		Car a('S', Sspeed, id);
+		Car b('N', Nspeed, id);
 		hospital[i].setnoScar(noScar);
 		hospital[i].setnoNcar(noNcar);
 		hospital[i].enqueueScar(a, noScar);
@@ -371,6 +371,25 @@ void Organizer::Loadfile(const string& filename) {
 	}
 
 }
+
+//load file function 
+void Organizer::Writefile() {
+	string Oname = "Output_" +filename;
+	ofstream outputF;
+	outputF.open(Oname);
+	outputF << "FT" << " " << "PID" << " " << "QT" << " " << "WT";
+//PUT LOOP HERE
+
+
+	outputF << "patients: " << Reqno << "[NP: " << TotalNpNo << ", " << "SP: " << TotalSpNo << ", " << "EP: " << TotalEPNo << "]";
+	outputF << "hospitals: " << Hospitalnumber;
+	outputF << "cars: " << Totalcars << "[Scars: " << noScar << ", " << "Ncars: " << noNcar << "]";
+	outputF << "Avg wait time = "; //PUT THESE HERE
+	outputF << "Avg busy time = ";
+	outputF << "Avg utilization = ";
+
+}
+
 
 Organizer::~Organizer() {
 	delete[] hospital; 

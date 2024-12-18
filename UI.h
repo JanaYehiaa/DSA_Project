@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include <string>
+#include "Car.h"
 #include"Patient.h"
 #include"PriQueue.h"
 using namespace std;
@@ -17,8 +18,9 @@ public:
 	int readmode();
 	int getmode() const;
 	void printPatient(LinkedQueue<Patient> &p, int T);
-	string getFilename();
+	string getFilename() const;
 	void waitForEnter();
+	void printCarInfo(priQueue<Car> cars);
 	void printPriPatient(priQueue<Patient> &p, int T);
 	template<typename T>
 	void display_same_line(T x)

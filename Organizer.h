@@ -7,10 +7,15 @@
 class Organizer
 {
 	int Reqno;
+	int TotalEPNo;
+	int TotalNpNo;
+	int TotalSpNo;
 	int Hospitalnumber;
 	int FinishedPat=0;
 	int noScar;
 	int noNcar;
+	int Totalcars;
+	string filename;
 public:
 	LinkedQueue<Patient> allReq;
 	LinkedQueue<Patient> cancel;
@@ -20,6 +25,7 @@ public:
 	LinkedQueue<Patient> finished;
 	Organizer();
 	void Loadfile(const string& filename);
+	void Writefile();
 	void moveNPReqToFinish(LinkedQueue<Patient>& list, Hospital& h);
 	void moveEPReqToFinish(priQueue<Patient>& list, Hospital&h);
 	void moveSPReqToFinish(LinkedQueue<Patient>& list, Hospital& h);

@@ -3,7 +3,7 @@
 #include "priQueue.h"
 
 UI::UI():mode(-1) { }
-string UI::getFilename(){
+string UI::getFilename() const{
 	cout << "Please Enter Filename to be Loaded!";
 	string a;
 	cin >> a;
@@ -16,6 +16,11 @@ int UI::getmode() const {
 void UI::waitForEnter() {
 	cout << "Press Enter to display next hospital! " << endl;
 	cin.get();
+}
+
+void UI::printCarInfo(priQueue<Car> cars)
+{
+
 }
 
 
