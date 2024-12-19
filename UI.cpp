@@ -18,10 +18,7 @@ void UI::waitForEnter() {
 	cin.get();
 }
 
-void UI::printCarInfo(priQueue<Car> cars)
-{
 
-}
 
 
 int UI::readmode()

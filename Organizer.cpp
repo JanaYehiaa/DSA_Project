@@ -2,12 +2,39 @@
 
 
 
-
+/*
 Organizer::Organizer() {
 	Simulation();
 }
+*/
+Organizer::Organizer() {
+	UI ui;
+	ui.readmode();
+	filename = ui.getFilename();
+	if (ui.getmode() == 1) InteractiveMode();
+	else if(ui.getmode() ==2)SilentMode();
+}
 
 
+void Organizer::setPatFinishTime(Patient p, Car c){
+	int ft = (p.getPickupTime() + (p.getDistance() / c.getSpeed()));
+	p.setFinishTime(ft);
+}
+void Organizer::setPatPickupTime(Patient p, Car c){
+	int pt = (c.getAT() + (p.getDistance() / c.getSpeed()));
+	p.setPickupTime(pt);
+}
+
+int Organizer::avgWaitTime(LinkedQueue<Patient>& p, int f) const {
+	int wt = 0;
+	LinkedQueue<Patient> temp1 = p;
+	Patient P;
+	while (!temp1.isEmpty()) {
+		temp1.dequeue(P);
+		wt += P.getWaitTime();
+	}
+	return (wt / f);
+}
 
 void Organizer::Simulation( ) {
 	srand((int)time(NULL));
@@ -292,9 +319,9 @@ void Organizer::Loadfile(const string& filename) {
 		hospital[i].enqueueScar(a, noScar);
 		hospital[i].enqueueNcar(b, noNcar);
 	}
-
+	//outcar failure probability
+	file >> FailProb;
 	//handling requests
-
 	string type = "N/A";
 	int QT = 0;
 	int PID = -1;
@@ -372,21 +399,25 @@ void Organizer::Loadfile(const string& filename) {
 }
 
 //output file function 
-bool Organizer::Writefile() {
+bool Organizer::Writefile(LinkedQueue<Patient>& p) {
 	string Oname = "Output_" +filename;
 	ofstream outputF(Oname);
-
+	LinkedQueue<Patient> temp1 = p;
+	Patient P;
 	if (!outputF) return false;
 
 	outputF << "FT" << " " << "PID" << " " << "QT" << " " << "WT";
-//PUT LOOP HERE
-
+	while (!temp1.isEmpty())
+		temp1.dequeue(P);
+	for (int i = 0; i < FinishedPat; i++) {
+		outputF << P.getFinishTime() << " " << P.getID() << " " << P.getRequestTime() << " " << P.getWaitTime();
+	}
 
 	outputF << "patients: " << Reqno << "[NP: " << TotalNpNo << ", " << "SP: " << TotalSpNo << ", " << "EP: " << TotalEPNo << "]";
 	outputF << "hospitals: " << Hospitalnumber;
 	outputF << "cars: " << Totalcars << "[Scars: " << noScar << ", " << "Ncars: " << noNcar << "]";
-	outputF << "Avg wait time = "; //PUT THESE HERE
-	outputF << "Avg busy time = ";
+	outputF << "Avg wait time = "<<avgWaitTime(p, FinishedPat); 
+	outputF << "Avg busy time = "; //PUT THESE HERE
 	outputF << "Avg utilization = ";
 	return true;
 }
@@ -396,7 +427,7 @@ void Organizer::SilentMode() {
 	UI ui;
 	ui.display("Silent Mode, Simulation Starts...");
 	while (mainSimulation());
-	if(Writefile())
+	if(Writefile(finished))
 	ui.display("Simulation ends, Output file created!");
 	else
 	ui.display("Something Went wrong!");
@@ -407,7 +438,9 @@ void Organizer::SilentMode() {
 void Organizer::InteractiveMode() {
 	UI ui;
 	int timestep = 0;
-	//while loop on sim but use system pause so that it doesnt run continuously
+	while (mainSimulation()) {
+
+	}
 	return;
 }
 

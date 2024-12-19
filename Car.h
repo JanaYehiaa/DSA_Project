@@ -8,6 +8,7 @@ class Car
 {
 	char carType;
 	int carSpeed;
+	int assignmentTime;
 	int hospID;
 	int carID;
 	string carStatus;
@@ -19,6 +20,7 @@ public:
 	void setSpeed(int speed);
 	void setID(int id);
 	int getID();
+	int getAT() const;
 	void setStatus(string status);
 	char getType() const;
 	int getSpeed() const;

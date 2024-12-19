@@ -30,7 +30,7 @@ Patient* Car::getPatient() { return patient; }
 char Car::getType() const { return carType; }
 int Car::getSpeed() const { return carSpeed;}
 string Car::getStatus() const { return carStatus;}
-
+int Car::getAT() const { return assignmentTime; }
 ostream& operator <<(ostream& out, const Car c) {
 	out << c.getStatus() << ",";
 	return out;
