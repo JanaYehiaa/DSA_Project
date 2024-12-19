@@ -11,6 +11,7 @@ class Car
 	int assignmentTime;
 	int hospID;
 	int carID;
+	bool failed;
 	string carStatus;
 	Patient* patient=nullptr;
 public:
@@ -19,7 +20,9 @@ public:
 	void setType(char type);
 	void setSpeed(int speed);
 	void setID(int id);
-	int getID();
+	int getID() const;
+	void setFail(bool f);
+	bool getFailed() const;
 	int getAT() const;
 	void setStatus(string status);
 	char getType() const;

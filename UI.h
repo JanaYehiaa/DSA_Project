@@ -30,6 +30,6 @@ public:
 	void display(T x) {
 		cout << x << endl;
 	}
-
+	void printCarInfo(priQueue<Car>& cars);
 };
 	

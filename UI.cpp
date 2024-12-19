@@ -84,3 +84,13 @@ void UI::printPriPatient(priQueue<Patient> &p, int T)
 	}
 	//delete temp2;
 }
+void UI::printCarInfo(priQueue<Car>& cars)
+{
+	priQueue<Car> temp = cars;
+	Car c;
+	int s;
+	while (!temp.isEmpty()) {
+		temp.dequeue(c, s);
+		cout << c.getType() << c.getID() << "_H" << c.getHospID() << "_P" << c.getPatient() << endl;
+	}
+}

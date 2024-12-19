@@ -53,8 +53,8 @@ public:
 	void printEPrequest();
 	int getID() const;
 	Car* getCars() const;
-	void enqueueScar(Car &car, int n=1);
-	void enqueueNcar(Car& car, int n =1);
+	void enqueueScar(Car& car);
+	void enqueueNcar(Car& car);
 	Car* dequeueNcar();
 	Car* dequeueScar();
 	void setDistance(int i, int j, int d);

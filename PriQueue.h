@@ -137,5 +137,17 @@ public:
             head = head->getNext();
         }
     }
+    int count(priQueue<T>& p) {
+        priQueue<T> temp = p;
+        int c = 0;
+        T x;
+        int y = 1;
+        while (!temp.isEmpty()) {
+            temp.dequeue(x, y);
+            c++;
+        }
+        return c;
+    }
+
 
 };

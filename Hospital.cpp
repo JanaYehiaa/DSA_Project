@@ -35,14 +35,11 @@ int Hospital::getID() const { return ID; }
 Car* Hospital::getCars() const { return cars; }
 
 
-void Hospital::enqueueScar(Car& car,int n ) {
-	for (int i = 0; i < n; i++)
-		SCarslist.enqueue(car);
+void Hospital::enqueueScar(Car& car) {
+	SCarslist.enqueue(car);
 }
-void Hospital::enqueueNcar(Car& car, int n ) {
-	for (int i = 0; i < n; i++)
-		NCarslist.enqueue(car);
-	
+void Hospital::enqueueNcar(Car& car) {
+	NCarslist.enqueue(car);
 }
 
 

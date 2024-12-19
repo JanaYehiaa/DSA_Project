@@ -309,16 +309,25 @@ void Organizer::Loadfile(const string& filename) {
 
 	//looping on number of hospitals and creating instances 
 	for (int i = 0; i < Hospitalnumber; i++) {
-		
 		int id = i + 1;
+		int carID = 0;
 		file >> noScar >> noNcar;
-		Car a('S', Sspeed, id);
-		Car b('N', Nspeed, id);
-		hospital[i].setnoScar(noScar);
-		hospital[i].setnoNcar(noNcar);
-		hospital[i].enqueueScar(a, noScar);
-		hospital[i].enqueueNcar(b, noNcar);
+		for (int j = 0; j < noNcar; j++) {
+			Car b('N', Nspeed, id);
+			b.setID(carID + 1);
+			hospital[i].enqueueNcar(b);
+			hospital[i].setnoNcar(noNcar);
+			carID++;
+		}
+		for (int j = 0; j < noScar; j++) {
+			Car a('S', Sspeed, id);
+			a.setID(carID);
+			hospital[i].setnoScar(noScar);
+			hospital[i].enqueueScar(a);
+			carID++;
+		}
 	}
+
 	//outcar failure probability
 	file >> FailProb;
 	//handling requests
