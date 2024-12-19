@@ -7,6 +7,7 @@
 class Organizer
 {
 	int Reqno;
+	int CancelReq;
 	int TotalEPNo;
 	int TotalNpNo;
 	int TotalSpNo;
@@ -25,7 +26,7 @@ public:
 	LinkedQueue<Patient> finished;
 	Organizer();
 	void Loadfile(const string& filename);
-	void Writefile();
+	bool Writefile();
 	void moveNPReqToFinish(LinkedQueue<Patient>& list, Hospital& h);
 	void moveEPReqToFinish(priQueue<Patient>& list, Hospital&h);
 	void moveSPReqToFinish(LinkedQueue<Patient>& list, Hospital& h);
@@ -34,11 +35,14 @@ public:
 	void moveCarOuttoBack(priQueue<Car>& out);
 	void moveCarBacktoFree(priQueue<Car>& backCars);
 	void Simulation();
+	bool mainSimulation();
 	int getHospitalnum() const;
 	int getReqno() const;
 	void AssignNPToNC(Patient P, Hospital& h);
 	void AssignEPToEC(Patient P, Hospital& h);
 	void AssignSPToSC(Patient SP, Hospital& h); 
+	void SilentMode();
+	void InteractiveMode();
 	~Organizer();
 };
 

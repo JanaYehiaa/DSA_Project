@@ -336,9 +336,8 @@ void Organizer::Loadfile(const string& filename) {
 
 
 	//handling cancellation
-	int nbofcancellation = 0;
-	file >> nbofcancellation;
-	for (int i = 0; i < nbofcancellation; i++) {
+	file >> CancelReq;
+	for (int i = 0; i < CancelReq; i++) {
 		file >> CT >> PID >> HID;
 		
 		LinkedQueue <Patient> tempQueue;  // temporary queue for traversal
@@ -372,11 +371,13 @@ void Organizer::Loadfile(const string& filename) {
 
 }
 
-//load file function 
-void Organizer::Writefile() {
+//output file function 
+bool Organizer::Writefile() {
 	string Oname = "Output_" +filename;
-	ofstream outputF;
-	outputF.open(Oname);
+	ofstream outputF(Oname);
+
+	if (!outputF) return false;
+
 	outputF << "FT" << " " << "PID" << " " << "QT" << " " << "WT";
 //PUT LOOP HERE
 
@@ -387,8 +388,40 @@ void Organizer::Writefile() {
 	outputF << "Avg wait time = "; //PUT THESE HERE
 	outputF << "Avg busy time = ";
 	outputF << "Avg utilization = ";
+	return true;
+}
+
+//silent mode
+void Organizer::SilentMode() {
+	UI ui;
+	ui.display("Silent Mode, Simulation Starts...");
+	while (mainSimulation());
+	if(Writefile())
+	ui.display("Simulation ends, Output file created!");
+	else
+	ui.display("Something Went wrong!");
 
 }
+
+//interactive mode
+void Organizer::InteractiveMode() {
+	UI ui;
+	int timestep = 0;
+	//while loop on sim but use system pause so that it doesnt run continuously
+	return;
+}
+
+
+
+
+//main sim function
+bool Organizer::mainSimulation() {
+	UI ui;
+
+	return 0;
+}
+
+
 
 
 Organizer::~Organizer() {
