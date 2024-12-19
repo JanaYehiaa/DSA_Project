@@ -422,38 +422,81 @@ bool Organizer::Writefile(LinkedQueue<Patient>& p) {
 	return true;
 }
 
-//silent mode
-void Organizer::SilentMode() {
-	UI ui;
-	ui.display("Silent Mode, Simulation Starts...");
-	while (mainSimulation());
-	if(Writefile(finished))
-	ui.display("Simulation ends, Output file created!");
-	else
-	ui.display("Something Went wrong!");
 
-}
 
 //interactive mode
-void Organizer::InteractiveMode() {
+void Organizer::InteractiveMode(int timestep, Hospital& currentHospital, int HoN) {
 	UI ui;
-	int timestep = 0;
-	while (mainSimulation()) {
+	ui.display_same_line("Current Timestep:");
+	ui.display(timestep);
+	ui.display_same_line("================  HOSPITAL #");
+	ui.display_same_line(HoN + 1);
+	ui.display("data  =================");
 
-	}
-	return;
+	ui.display_same_line("NP Requests: ");
+	ui.printPatient(currentHospital.getNPQueue(), timestep);
+	ui.display(" "); //to leave a line between patients
+
+	ui.display_same_line("SP Requests: ");
+	ui.printPatient(currentHospital.getSPQueue(), timestep);
+	ui.display(" ");
+
+	ui.display_same_line("EP Requests: ");
+
+	ui.printPriPatient(currentHospital.getEPQueue(), timestep);
+	ui.display(" ");
+
+	//printing scars and ncars
+	ui.display_same_line("Free Cars: ");
+	ui.display_same_line(currentHospital.getnoScar());
+	ui.display_same_line("Scars, ");
+	ui.display_same_line(currentHospital.getnoNcar());
+	ui.display("Ncars");
+
+	ui.display_same_line("================  HOSPITAL #");
+	ui.display_same_line(HoN + 1);
+	ui.display("data  end =================");
+	ui.display("-----------------------------------------");
+	ui.display_same_line("Finished patients: ");
+	ui.printPatient(finished, timestep);
+	ui.display(" ");
 }
 
+
+
+//timestep handling
+void Organizer::HandleTimeStep(int timestep) {
+	for (int i = 0; i < Hospitalnumber; i++) {
+		Hospital& currentHospital = hospital[i];
+
+
+
+
+
+
+
+	}
+}
 
 
 
 //main sim function
-bool Organizer::mainSimulation() {
+void Organizer::mainSimulation() {
 	UI ui;
-
-	return 0;
+	bool complete = false;
+	int timestep = 0;
+	Loadfile(filename);
+	while (!complete) {
+		timestep++;
+		HandleTimeStep(timestep);
+		complete = (Reqno == (FinishedPat + CancelReq));
+	}
+	return;
 }
 
+void Organizer::SilentMode() {
+	UI ui;
+}
 
 
 

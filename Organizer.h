@@ -38,15 +38,16 @@ public:
 	void setPatFinishTime(Patient p, Car c);
 	void setPatPickupTime(Patient p, Car c);
 	void Simulation();
-	bool mainSimulation();
+	void mainSimulation();
 	int getHospitalnum() const;
 	int getReqno() const;
 	int avgWaitTime(LinkedQueue<Patient>& p, int f) const;
 	void AssignNPToNC(Patient P, Hospital& h);
 	void AssignEPToEC(Patient P, Hospital& h);
 	void AssignSPToSC(Patient SP, Hospital& h); 
+	void InteractiveMode(int timestep, Hospital& current, int Hon);
 	void SilentMode();
-	void InteractiveMode();
+	void HandleTimeStep(int timestep);
 	~Organizer();
 };
 
