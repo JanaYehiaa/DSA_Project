@@ -8,6 +8,7 @@ Organizer::Organizer() {
 }
 /*
 Organizer::Organizer() {
+	srand((int)time(NULL));
 	UI ui;
 	ui.readmode();
 	filename = ui.getFilename();
@@ -500,6 +501,11 @@ void Organizer::InteractiveMode(int timestep, Hospital& currentHospital, int HoN
 	ui.display(" ");
 }
 
+//generating a random number between zero and limit
+int Organizer::getRandomNum(int limit) {
+	if (limit <= 0) return 0;
+	return rand() % (limit+1);
+}
 
 
 //timestep handling
@@ -507,24 +513,107 @@ void Organizer::HandleTimeStep(int timestep) {
 	UI ui;
 	for (int i = 0; i < Hospitalnumber; i++) {
 		Hospital& currentHospital = hospital[i];
-
 		currentHospital.AssignEp(timestep);
 		currentHospital.AssignNPtoNc(timestep);
 		currentHospital.AssignSPtoSC(timestep);
 		FreetoOut(timestep, currentHospital);
 		OuttoBack(timestep);
-		//handle cancellation + chwck up here
+		//handle cancellation + check up here
+
+	
 		BacktoFree(timestep, currentHospital);
-
-
-
-
 		if (ui.getmode() == 1) InteractiveMode(timestep, currentHospital, i);
 
 	}
+	int x = getRandomNum(100);
+	if (x <= FailProb) {
+		//choose random car to fail from out list
+		int count = outCars.count(outCars);
+		int random = getRandomNum(count);
+		priQueue<Car*> temp;
+		Car* c = nullptr;
+		int pri = 0;
+		for (int i = 0; i < random; i++) {
+			outCars.dequeue(c, pri);
+			temp.enqueue(c, pri);
+		}
+		outCars.dequeue(c, pri);
+		//CALL FAILURE ACTION HERE WITH CAR c AND PRIORITY pri
+		while (!temp.isEmpty()) {
+			temp.dequeue(c, pri);
+			outCars.enqueue(c, pri);
+		}
+
+	}
+}
+Car* Organizer::pickRandCar(priQueue<Car*>& carlist) {
+	int count = carlist.count(carlist);
+	int random = getRandomNum(count);
+
+	priQueue<Car*> temp;
+	Car* c = nullptr;
+	int pri = 0;
+	for (int i = 0; i < random; i++) {
+		carlist.dequeue(c, pri);
+		temp.enqueue(c, pri);
+	}
+	carlist.dequeue(c, pri);
+	while (!temp.isEmpty()) {
+		temp.dequeue(c, pri);
+		carlist.enqueue(c, pri);
+	}
+	return c;
 }
 
 
+/*
+//populating patient lists in hospitals if their timestep is reached
+void Organizer::populateHospitals(int timestep) {
+	Patient* p = nullptr;
+	LinkedQueue<Patient*> temp;
+	int c = 0;
+	while (!allReq.isEmpty()) {
+		allReq.peek(p);
+		if (p->getRequestTime() <= timestep) {
+			allReq.dequeue(p);
+			temp.enqueue(p);
+			c++;
+		}
+		else {
+			break;
+		}
+	}
+	for (int i = 0; i < c; i++) {
+		temp.dequeue(p);
+		for (int i; i < Hospitalnumber; i++) {
+			int x = 
+			if(p->getNearestHospital() == hospital[])
+		}
+	}
+	
+	
+}
+
+
+*/
+
+/*
+void Organizer::populateHospitals(int timestep) {
+	LinkedQueue<Patient*> temp = allReq;
+	Patient* p = nullptr;
+	temp.peek(p);
+	while (!temp.isEmpty()) {
+		if (p->getRequestTime() <= timestep && (p->getNearestHospital() == h.getID())) {
+			temp.dequeue(p);
+
+										
+		}
+
+	}
+
+
+}
+*/
 
 //main sim function
 void Organizer::mainSimulation() {
@@ -565,7 +654,7 @@ void Organizer::FreetoOut(int timestep, Hospital& current) {
 
 void Organizer::OuttoBack(int timestep)
 {
-	
+	//three cases: 
 	Car* c = nullptr;
 	int pri = 0;
 	while (!outCars.isEmpty()) {
@@ -573,6 +662,7 @@ void Organizer::OuttoBack(int timestep)
 		if (-1 * pri <= timestep) {
 			outCars.dequeue(c, pri);
 			Patient* p = c->getPatient();
+			p->setpicked(true);
 			int ft = p->getFinishTime();
 			c->setStatus("Loaded");
 			backCars.enqueue(c, ( - 1 * ft));

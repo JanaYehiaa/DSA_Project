@@ -16,7 +16,7 @@ class Organizer
 	int noScar;
 	int noNcar;
 	int Totalcars;
-	float FailProb;
+	int FailProb;
 	int CheckUpTime;
 	string filename;
 public:
@@ -29,10 +29,12 @@ public:
 	LinkedQueue<Patient*> finished;
 	Organizer();
 	void Loadfile(const string& filename);
+	//void populateHospitals(int timestep);
 	bool Writefile(LinkedQueue<Patient*>& p);
 	void moveNPReqToFinish(LinkedQueue<Patient*>& list, Hospital& h);
 	void moveEPReqToFinish(priQueue<Patient*>& list, Hospital&h);
 	void moveSPReqToFinish(LinkedQueue<Patient*>& list, Hospital& h);
+	Car* pickRandCar(priQueue<Car*>& carlist);
 	//void moveSCartoOut(Hospital& h);
 	//void moveNCartoOut(Hospital& h);
 	//void moveCarOuttoBack(priQueue<Car*>& out);
@@ -43,6 +45,7 @@ public:
 	void reEnqueuePatient(Patient* p);
 	void Simulation();
 	void mainSimulation();
+	int getRandomNum(int limit);
 	int getHospitalnum() const;
 	int getReqno() const;
 	int avgWaitTime(LinkedQueue<Patient*>& p, int f) const;

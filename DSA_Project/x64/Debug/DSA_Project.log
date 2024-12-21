@@ -1,1 +1,6 @@
-﻿  DSA_Project.vcxproj -> C:\Users\Lenovo\Desktop\DSA_Project\x64\Debug\DSA_Project.exe
+﻿  Main.cpp
+  Organizer.cpp
+C:\Users\Lenovo\Desktop\DSA_Project\Organizer.cpp(507,16): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\Lenovo\Desktop\DSA_Project\Organizer.cpp(528,8): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  DSA_Project.vcxproj -> C:\Users\Lenovo\Desktop\DSA_Project\x64\Debug\DSA_Project.exe
