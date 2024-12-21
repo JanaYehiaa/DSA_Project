@@ -302,8 +302,32 @@ public:
 		}
 	}
 
-
-
+	template<typename T>
+	int count(LinkedQueue<T>& q) {
+		LinkedQueue<T> temp = q;
+		int c = 0;
+		T x;
+		while (!temp.isEmpty()) {
+			temp.dequeue(x);
+			c++;
+		}
+		return c;
+	}
+	/*
+	template<typename T>
+	void print() {
+		if (frontPtr == nullptr)
+			return;
+		UI ui;
+		if (frontPtr->getNext() == nullptr) {
+			ui.display_same_line(frontPtr->getItem());
+		}
+		while (frontPtr->getNext() != nullptr) {
+			ui.display_same_line(frontPtr->getItem());
+			frontPtr = frontPtr->getNext();
+		}
+	}
+*/
 
 };
 

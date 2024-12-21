@@ -13,7 +13,7 @@ void Patient::setDistance(int dist) { distance = dist; }
 void Patient::setPatientType(string type) { patientType = type; }
 void Patient::setID(int id) { ID = id; }
 void Patient::setFinishTime(int f) { finishTime=f; }
-void Patient::setWaitTime(int pt, int qt) { waitTime = pt - qt; }
+void Patient::setWaitTime(int pt) { waitTime = pt - requestTime; }
 int Patient::getRequestTime() const { return requestTime; }
 int Patient::getPickupTime() const { return pickupTime; }
 int Patient::getNearestHospital() const { return nearestHospital; }

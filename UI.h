@@ -17,10 +17,10 @@ public:
 	//~UI();
 	int readmode();
 	int getmode() const;
-	void printPatient(LinkedQueue<Patient> &p, int T);
+	void printPatient(LinkedQueue<Patient*> &p, int T);
 	string getFilename() const;
 	void waitForEnter();
-	void printPriPatient(priQueue<Patient> &p, int T);
+	void printPriPatient(priQueue<Patient*> &p, int T);
 	template<typename T>
 	void display_same_line(T x)
 	{

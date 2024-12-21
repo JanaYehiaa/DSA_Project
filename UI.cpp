@@ -36,16 +36,16 @@ int UI::readmode()
 
 }
 
-void UI::printPatient(LinkedQueue<Patient> &p, int T)
+void UI::printPatient(LinkedQueue<Patient*> &p, int T)
 {
 	int c = 0;
-	LinkedQueue<Patient> temp1 = p;
-	LinkedQueue<Patient> temp2;
+	LinkedQueue<Patient*> temp1 = p;
+	LinkedQueue<Patient*> temp2;
 	//if timestep of patient arrives, put that patient in temp Queue
 	while (!temp1.isEmpty()) {
-		Patient a;
+		Patient *a=new Patient;
 		temp1.dequeue(a);
-		if (a.getRequestTime() <= T) {
+		if (a->getRequestTime() <= T) {
 			c++;
 			temp2.enqueue(a);
 		}
@@ -53,23 +53,23 @@ void UI::printPatient(LinkedQueue<Patient> &p, int T)
 	cout << "Total Number: " << c<<" ";
 	cout << "Patient's IDs: ";
 	while (!temp2.isEmpty()) {
-		Patient b;
+		Patient *b=new Patient;
 		temp2.dequeue(b);
-		cout << b;
+		cout << b->getID()<<" ";
 	}
 }
 
-void UI::printPriPatient(priQueue<Patient> &p, int T)
+void UI::printPriPatient(priQueue<Patient*> &p, int T)
 {
 	int c = 0;
-	priQueue<Patient> temp1 = p;
-	priQueue<Patient> temp2;
+	priQueue<Patient*> temp1 = p;
+	priQueue<Patient*> temp2;
 	int x = 0;
 	//if timestep of patient arrives, put that patient in temp Queue
 	while (!temp1.isEmpty()) {
-		Patient a;
+		Patient *a=new Patient;
 		temp1.dequeue(a, x);
-		if (a.getRequestTime() <= T) {
+		if (a->getRequestTime() <= T) {
 			c++;
 			temp2.enqueue(a,x);
 		}
@@ -78,9 +78,9 @@ void UI::printPriPatient(priQueue<Patient> &p, int T)
 	cout << "Total Number: " << c << " ";
 	cout << "Patient's IDs: ";
 	while (!temp2.isEmpty()) {
-		Patient b;
+		Patient * b=new Patient;
 		temp2.dequeue(b, x);
-		cout << b;
+		cout << b->getID()<<" ";
 	}
 	//delete temp2;
 }

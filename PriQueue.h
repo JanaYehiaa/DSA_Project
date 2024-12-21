@@ -113,7 +113,7 @@ public:
         if (isEmpty())
             return false;
 
-        topEntry = head->getItem();
+        topEntry = head->getItem(pri);
         pri = head->getPri();
         return true;
     }
@@ -136,6 +136,20 @@ public:
             ui.display_same_line(head->getItem(a));
             head = head->getNext();
         }
+    }
+
+
+
+    int count(priQueue<T>& p) {
+        priQueue<T> temp = p;
+        int c = 0;
+        T x;
+        int y = 1;
+        while (!temp.isEmpty()) {
+            temp.dequeue(x, y);
+            c++;
+        }
+        return c;
     }
 
 };

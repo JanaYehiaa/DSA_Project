@@ -21,7 +21,7 @@ public:
 	void setRequestTime(int request);
 	void setFinishTime(int f);
 	void setPickupTime(int pickup);
-	void setWaitTime(int pt, int qt);
+	void setWaitTime(int pt);
 	void setNearestHospital(int nearest);
 	void setDistance(int dist);
 	void setPatientType(string type);
